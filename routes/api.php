@@ -24,9 +24,19 @@ Route::group([
     'prefix' => 'auth'
 ], function ($router) {
 
-    Route::post('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login')->name('login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+});
 
+
+Route::post('register', function(){
+    $create = \App\User::create([
+        'name'      => 'Alfian Dwi Nugraha',
+        'email'     => 'viandwicyber@gmail.com',
+        'password'  => bcrypt('1')
+    ]);
+
+    return response()->json($create);
 });
